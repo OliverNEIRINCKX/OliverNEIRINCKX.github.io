@@ -7,12 +7,14 @@
 
                     for (let x in todo) {
                         let thing = todo[x];
+                        thing.userId = 'username';
+
 
                         for (let y in thing) {
-                            text += thing[y] + "<br>"
+                            text += thing[y] + "<br>";
                         }
 
-                        text += "<br>"
+                        text += "<br>";
                     }
 
                     return text;
