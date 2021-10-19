@@ -3,8 +3,13 @@
 	<body>
 		<h1>JavaScriptTest</h1>
 		
-		<p></p>
+		<p id="demo"></p>
 		
-		<script></script>
+		<script>
+		fetch('https://jsonplaceholder.typicode.com/todos/1')
+		.then(resp => resp.json())
+		.then(todo => document.getElementById("demo").innerHTML = todo.title)
+		</script>
+
 	</body>
 </html>
