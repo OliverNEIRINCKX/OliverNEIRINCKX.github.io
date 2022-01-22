@@ -23,6 +23,23 @@
         <script> 
         fetch('sub/testJSON.html')
 		        .then(resp => resp.json())
+                .then(todo => {
+                    let text = "";
+
+                    for (let x in todo) {
+                        let thing = todo[x];
+                        thing.userId = 'username';
+
+
+                        for (let y in thing) {
+                            text += thing[y] + "<br>";
+                        }
+
+                        text += "<br>";
+                    }
+
+                    return text;
+                })
                 .then(thing => document.getElementById("demo").innerHTML= thing)
 
         </script>
