@@ -21,7 +21,7 @@
         <p id="demo"></p>
 
         <script> 
-        fetch('http://localhost:8080/planetHotels?planetName=Venus&checkInDate=2025-10-27&checkOutDate=2025-10-29&numberOfPersons=3')
+        fetch('sub/testJSON.html')
 		        .then(resp => resp.json())
                 .then(thing => document.getElementById("demo").innerHTML= thing)
 
