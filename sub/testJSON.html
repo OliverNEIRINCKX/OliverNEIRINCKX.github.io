@@ -4,7 +4,6 @@
         <p id= "demo"></p>
         <script>
              fetch('https://jsonplaceholder.typicode.com/todos')
-		        .then(resp => resp.json())
                 .then(todo => document.getElementById("demo").innerHTML= todo)
         </script>
         
