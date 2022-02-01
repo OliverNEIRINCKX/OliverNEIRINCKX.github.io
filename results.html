@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html >
+<html>
+    <p id="fuck"></p>
     <body>
-        <pre id = "demo"></pre>
-    
         <script>
-             fetch('https://jsonplaceholder.typicode.com/todos')
-             .then(resp => resp.json())
-             .then(todo => {
+            new URLSearchParams(window.location.search).forEach((value, name) => {
+                fetch('https://jsonplaceholder.typicode.com/'+ `${value}`)
+                    .then(resp => resp.json())
+                    .then(todo => {
                     let text = "";
 
                     for (let x in todo) {
@@ -22,10 +22,10 @@
                     }
 
                     return text;
-                })
-             .then(todo => document.getElementById("demo").innerHTML= todo)
+                    })
+                    .then(todo => document.getElementById("fuck").innerHTML= todo)
+            })
         </script>
-        
+    
     </body>
-
 </html>

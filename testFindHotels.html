@@ -10,39 +10,48 @@
         <h2>Welcome to SpaceHotels!</h2>
         <h3>Where would you like to go?</h3>
 
-        <form target= "_self">
-            <input type= "text" id= "planetName" name= "planetName" value= "Mars"/>
-            <input type= "date" id= "checkInDate" name= "checkInDate"/>
-            <input type= "date" id= "checkOuDate" name= "checkOutDate"/>
-            <input type= "number" id= "numberOfPersons" name= "numberOfPersons"  value= "3"/>
-            <input type="submit" value="Submit">
+        <form name="findHotels" action="showAvailableHotels.html">
+            <input type= "text" id= "planetName" name= "planetName" value= "Mars" placeholder="Planet ex. Mars" required>
+            <label for="checkInDate">Check-in Date</label>
+            <input type= "date" id= "checkInDate" name= "checkInDate" value= "2025-05-20" placeholder="check-in date" onchange="getMaxDate(), getMinDate()" required>
+            <label for="checkOutDate">Check-out Date</label>
+            <input type= "date" id= "checkOutDate" name= "checkOutDate" value= "2025-05-25" placeholder="check-out date" required>
+            <input type="number" id="numberOfPersons" name= "numberOfPersons" value=3 placeholder="number of persons" required>
+            <input type="submit" value="Find Hotels">
         </form>
+        
+        
+        
+        <p id= "demo"></p>
 
-        <p id="demo"></p>
+        <script>
+            function frmt(number) {
+                if (number < 10) return "0" + number;
+                else return number;
+            }
 
-        <script> 
-        fetch('https://oliverneirinckx.github.io/sub/testJSON')
-		        .then(resp => resp.json())
-                .then(todo => {
-                    let text = "";
+            function getMinDate() {
+                let minDate = new Date(document.getElementById("checkInDate").value);
+                minDate.setDate(minDate.getDate() + 1);
+                let minDateString = minDate.getFullYear() + "-" + frmt((minDate.getMonth() + 1)) + "-" + frmt(minDate.getDate());
 
-                    for (let x in todo) {
-                        let thing = todo[x];
-                        thing.userId = 'username';
+                document.getElementById("checkOutDate").min = minDateString;
+            }
 
+            function getMaxDate() {
+                let maxDate = new Date(document.getElementById("checkInDate").value);
+                maxDate.setDate(maxDate.getDate() + 28);
+                let maxDateString = maxDate.getFullYear() + "-" + frmt((maxDate.getMonth() + 1)) + "-" + frmt(maxDate.getDate());
+                
+                document.getElementById("checkOutDate").max = maxDateString;
+            }
+            
 
-                        for (let y in thing) {
-                            text += thing[y] + "<br>";
-                        }
-
-                        text += "<br>";
-                    }
-
-                    return text;
-                })
-                .then(thing => document.getElementById("demo").innerHTML= thing)
+            getMinDate();
+            getMaxDate();
 
         </script>
         
+
     </body>
 </html>

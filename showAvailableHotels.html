@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <p>something something</p>
+        <p id="test"></p>
+        
+        <script>
+
+           function formatUrl() {
+            let url = "http://localhost:8080/planetHotels?"; 
+
+            let searchParams = new URLSearchParams(window.location.search);
+
+            return url+= searchParams.toString();
+           }
+           
+
+            fetch(formatUrl())
+                .then(resp => resp.json())
+                .then(list => {
+                    let text = "";
+
+                    for (let x in list) {
+                        let hotel = list[x]
+
+                        for (let y in hotel) {
+                            if (y == "name") {
+                                text += "<form action=\"sub/selectedHotel.html\" "
+                                    + "method=\"GET\" >"
+                                    + "<input type=\"submit\" "
+                                    + "name=\"hotelName\" "
+                                    + "value="
+                                    + "\"" + hotel[y] + "\" >"
+                                    + "</form>"
+                                    + "<br>" ;
+                            }
+                            else if (y == "availableRoomTypes") {
+                                let roomTypes = hotel[y];
+                                
+                                for (let z in roomTypes) {
+                                    let roomType = roomTypes[z];
+                                    
+                                    for (let a in roomType) {
+                                        text += a + " : " + roomType[a] + "<br>";
+                                    }
+                                    text += "<br>";
+                                }
+                            } 
+
+                            else {
+                                text += y + " : " + hotel[y] + "<br>"; 
+                            } 
+                    
+                        }
+
+                        text += "<br>" + "<br>";
+                    }
+
+                    return text;
+                })
+                .then(text => document.getElementById("test").innerHTML= text)
+
+        </script>
+    </body>
+</html>

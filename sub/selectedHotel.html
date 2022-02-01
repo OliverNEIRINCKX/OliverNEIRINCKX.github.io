@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <p id="demo"></p>
+        
+        <script>
+            new URLSearchParams(window.location.search).forEach((value, name) => {
+                fetch("http://localhost:8080/selectHotel?" + `${name}=${value}`)
+                .then(resp => resp.json())
+                .then(hotel => {
+                    let text = "";
+
+                    for (let x in hotel) {
+
+                        if (x == "availableRoomTypes") {
+                            let roomTypes = hotel[x];
+                            text+= "<form action=\"sub\intro.html\">";
+
+                            for (let y in roomTypes) {
+                                let roomType = roomTypes[y];
+                                text+="<br>";
+
+                                for (let z in roomType) {
+                                    if (z == "name") {
+                                        text += "<input type=\"radio\" " 
+                                            + "id=\"" + roomType[z] + "\""
+                                            + "name=\"roomTypeName\" "
+                                            + "value=\"" + roomType[z] + "\" >"
+                                            + "<label for=\"" + roomType[z] + "\" >"
+                                            + roomType[z] + "<br>";
+                                    }
+
+                                    else {
+                                        text += z + ": " + roomType[z] + "<br>";
+                                    }
+                                }
+
+                                text+="</label>";
+                                text+="<br>";
+                            }
+
+                            text+= "input type=\"submit\" value=\"Submit\">";
+                            text+= "</form>";
+                            text+= "<br>";
+                        }
+
+                        else {
+                            text+= x + ":" + hotel[x] + "<br>";
+                        }
+                    }
+
+                    text+= "<br>";
+                
+                })
+                .then(s =>  document.getElementById("demo").innerHTML = s)
+            })
+            
+        </script>
+    </body>
+</html>
