@@ -28,11 +28,11 @@
                                 text += "<form action=\"sub/selectedHotel.html\" "
                                     + "method=\"GET\" >"
                                     + "<input type=\"submit\" "
+                                    + "id=" + "\"" + hotel[y] + "\" "
                                     + "name=\"hotelName\" "
-                                    + "value="
-                                    + "\"" + hotel[y] + "\" >"
-                                    + "</form>"
-                                    + "<br>" ;
+                                    + "value= " + "\"" + hotel[y] + "\" >"
+                                    + "<label for=\"" + hotel[y] + "\" >"
+                                    + "<br>";
                             }
                             else if (y == "availableRoomTypes") {
                                 let roomTypes = hotel[y];
@@ -53,7 +53,8 @@
                     
                         }
 
-                        text += "<br>" + "<br>";
+                        text+= "</label></form>";
+                        text+= "<br>" + "<br>";
                     }
 
                     return text;

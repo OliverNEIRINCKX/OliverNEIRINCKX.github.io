@@ -20,7 +20,7 @@
             <input type="submit" value="Find Hotels">
         </form>
         
-        
+    
         
         <p id= "demo"></p>
 
@@ -46,9 +46,17 @@
                 document.getElementById("checkOutDate").max = maxDateString;
             }
             
+            function getMaxDateForCheckInDate() {
+                let maxDate = new Date();
+                maxDate.setDate(maxDate.getDate() + 365);
+                let maxDateString = maxDate.getFullYear() + "-" + frmt((maxDate.getMonth() + 1)) + "-" + frmt(maxDate.getDate());
+
+                document.getElementById("checkInDate").max = maxDateString;
+            }
 
             getMinDate();
             getMaxDate();
+            getMaxDateForCheckInDate();
 
         </script>
         

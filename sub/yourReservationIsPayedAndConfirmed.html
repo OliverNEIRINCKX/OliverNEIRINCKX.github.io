@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        
+        <p>your reservation is confirmed</p>
+        <p id="confirmed"></p>
+
+        <script>
+            fetch("http://localhost:8080/makeAReservation")
+            .then(resp => resp.json())
+            .then(reserv => {
+                let text = "";
+
+                for (let pr in reserv) {
+                    text += reserv[pr] + "<br>";
+                }
+
+                return text;
+            })
+            .then(text => document.getElementById("confirmed").innerHTML = text)
+            
+        </script>
+    </body>
+</html>

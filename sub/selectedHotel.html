@@ -1,60 +1,77 @@
 <!DOCTYPE html>
 <html>
     <body>
+        <p>jjiouo</p>
+        <p id="fuck"></p>
         <p id="demo"></p>
         
         <script>
-            new URLSearchParams(window.location.search).forEach((value, name) => {
-                fetch("http://localhost:8080/selectHotel?" + `${name}=${value}`)
-                .then(resp => resp.json())
-                .then(hotel => {
-                    let text = "";
+            function formatUrl() {
+            let url = "http://localhost:8080/selectHotel?"; 
 
-                    for (let x in hotel) {
+            let searchParams = new URLSearchParams(window.location.search);
 
-                        if (x == "availableRoomTypes") {
-                            let roomTypes = hotel[x];
-                            text+= "<form action=\"sub\intro.html\">";
+            let str = url + searchParams.toString();
 
-                            for (let y in roomTypes) {
-                                let roomType = roomTypes[y];
-                                text+="<br>";
+            document.getElementById("fuck").innerHTML = str;
 
-                                for (let z in roomType) {
-                                    if (z == "name") {
-                                        text += "<input type=\"radio\" " 
-                                            + "id=\"" + roomType[z] + "\""
-                                            + "name=\"roomTypeName\" "
-                                            + "value=\"" + roomType[z] + "\" >"
-                                            + "<label for=\"" + roomType[z] + "\" >"
-                                            + roomType[z] + "<br>";
-                                    }
+            return str;
+           }
 
-                                    else {
-                                        text += z + ": " + roomType[z] + "<br>";
-                                    }
-                                }
+           
+                fetch(formatUrl())
+                    .then(resp => resp.json())
+                    .then(hotel => {
+                        let text = " ";
 
-                                text+="</label>";
-                                text+="<br>";
+                        for (let x in hotel) {
+                            if (x == "name") {
+                              localStorage.setItem("hotelName", hotel[x]);  
                             }
 
-                            text+= "input type=\"submit\" value=\"Submit\">";
-                            text+= "</form>";
-                            text+= "<br>";
+                            if (x == "availableRoomTypes") {
+                                let roomTypes = hotel[x];
+                                text+= "<br>";
+                                text+= "<form action=\"fillInYourClientData.html\" >";
+
+                                for (let y in roomTypes) {
+                                    let roomType = roomTypes[y];
+                                    
+                                    for (let z in roomType) {
+                                        if (z == "name") {
+                                            text+= "<input type=\"radio\" " 
+                                                + "id=\"" + roomType[z] + "\" "
+                                                + "name=\"roomTypeName\" "
+                                                + "value=\"" + roomType[z] + "\" >"
+                                                + "<label for=\"" + roomType[z] + "\" >"
+                                                + z + ": " + roomType[z] + "<br>";
+                                        }
+
+                                        else {
+                                            text += z + ": " + roomType[z] + "<br>";
+                                        }
+                                    }
+
+                                    text+="</label>";
+                                    
+                                    text+="<br>";
+                                }
+
+                                text+= "<input type=\"submit\" value=\"Submit\">";
+                                text+= "</form>";
+                                text+= "<br>";
+                            }
+
+                            else {
+                                text+= x + ":" + hotel[x] + "<br>";
+                            }
                         }
 
-                        else {
-                            text+= x + ":" + hotel[x] + "<br>";
-                        }
-                    }
+                        text+= "<br>";
+                        return text;
+                    })
+                    .then(s =>  document.getElementById("demo").innerHTML = s);
 
-                    text+= "<br>";
-                
-                })
-                .then(s =>  document.getElementById("demo").innerHTML = s)
-            })
-            
         </script>
     </body>
 </html>
