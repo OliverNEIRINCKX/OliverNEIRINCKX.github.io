@@ -11,7 +11,16 @@
         <h3>Where would you like to go?</h3>
 
         <form name="findHotels" action="showAvailableHotels.html">
-            <input type= "text" id= "planetName" name= "planetName" value= "Mars" placeholder="Planet ex. Mars" required>
+            <label for="planetName">Choose a Planet:</label>
+            <select name="planetName" id="planetName">
+                <option value="Mercury">Mercury</option>
+                <option value="Venus">Venus</option>
+                <option value="Mars">Mars</option>
+                <option value="Jupiter">Jupiter</option>
+                <option value="Saturn">Saturn</option>
+                <option value="Uranus">Uranus</option>
+                <option value="Neptune">Neptune</option>
+            </select>
             <label for="checkInDate">Check-in Date</label>
             <input type= "date" id= "checkInDate" name= "checkInDate" value= "2025-05-20" placeholder="check-in date" onchange="getMaxDate(), getMinDate()" required>
             <label for="checkOutDate">Check-out Date</label>
