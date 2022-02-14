@@ -7,7 +7,9 @@
     </head>
     
     <body>
-        <h2>Welcome to SpaceHotels!</h2>
+        <h1>Welcome to SpaceHotels!</h1>
+        <h3>The best place to book hotels in our solar system</h3>
+        <br>
         <h3>Where would you like to go?</h3>
 
         <form name="findHotels" action="showAvailableHotels.html">
@@ -21,11 +23,12 @@
                 <option value="Uranus">Uranus</option>
                 <option value="Neptune">Neptune</option>
             </select>
-            <label for="checkInDate">Check-in Date</label>
-            <input type= "date" id= "checkInDate" name= "checkInDate" value= "2025-05-20" placeholder="check-in date" onchange="getMaxDate(), getMinDate()" required>
-            <label for="checkOutDate">Check-out Date</label>
-            <input type= "date" id= "checkOutDate" name= "checkOutDate" value= "2025-05-25" placeholder="check-out date" required>
-            <input type="number" id="numberOfPersons" name= "numberOfPersons" value=3 placeholder="number of persons" required>
+            <label for="checkInDate">Check-in Date: </label>
+            <input type= "date" id= "checkInDate" name= "checkInDate" placeholder="check-in date" onchange="getMaxDate(), getMinDate()" required>
+            <label for="checkOutDate">Check-out Date: </label>
+            <input type= "date" id= "checkOutDate" name= "checkOutDate" placeholder="check-out date" required>
+            <label for="numberOfPersons">Number of Persons: </label>
+            <input type="number" id="numberOfPersons" name= "numberOfPersons" value=3 min=1 placeholder="number of persons" required>
             <input type="submit" value="Find Hotels">
         </form>
         
@@ -63,10 +66,30 @@
                 document.getElementById("checkInDate").max = maxDateString;
             }
 
+            function getValueForCheckInDate() {
+                let value = new Date();
+                value.setDate(value.getDate() + 1);
+                let valueString = value.getFullYear() + "-" + frmt((value.getMonth() + 1)) + "-" + frmt(value.getDate());
+
+                document.getElementById("checkInDate").value = valueString;
+                //sets also the minDate for checkIndate
+                document.getElementById("checkInDate").min =valueString
+            }
+
+            function getValueForCheckOutDate() {
+                let value = new Date();
+                value.setDate(value.getDate() + 8);
+                let valueString = value.getFullYear() + "-" + frmt((value.getMonth() + 1)) + "-" + frmt(value.getDate());
+
+                document.getElementById("checkOutDate").value = valueString;
+            }
+
+            getValueForCheckInDate();
+            getValueForCheckOutDate();
             getMinDate();
             getMaxDate();
             getMaxDateForCheckInDate();
-
+            
         </script>
         
 

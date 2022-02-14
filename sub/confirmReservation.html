@@ -1,11 +1,18 @@
 <!DOCTYPE html>
 <html>
-    <p id="reservation"></p>
+   
     <body>
-        <p>confirm your reservation</p>
+        <p id="test"></p>
+        <h2>Confirm your reservation</h2>
+        <h3>Your Reservation:</h3>
+        <p id="reservation"></p>
+        
+
         <form action="payReservation.html">
             <input type="submit" value="Confirm and Pay reservation">
         </form>
+
+        <button onclick="window.location.href='../testFindHotels.html';">cancel</button>
 
         <script>
             function formatUrl() {
@@ -20,29 +27,32 @@
 
             function getDataFromLocalStrorage() {
                let roomTypeData= "";
-               roomTypeData += localStorage.getItem("name") + "<br>";
-               roomTypeData += localStorage.getItem("pricePerNight") + "<br>"; 
-               roomTypeData += localStorage.getItem("pricePerGuest") + "<br>"; 
-               roomTypeData += localStorage.getItem("totalPrice") + "<br>"; 
-               roomTypeData += localStorage.getItem("numberOfRooms") + "<br>";
+
+               roomTypeData += "roomType(s): " + localStorage.getItem("name") + "<br>";
+               roomTypeData += "pricePerNight: " + localStorage.getItem("pricePerNight") + "<br>"; 
+               roomTypeData += "pricePerGuest: " + localStorage.getItem("pricePerGuest") + "<br>"; 
+               roomTypeData += "totalPrice: " + localStorage.getItem("totalPrice") + "<br>"; 
+               roomTypeData += "numberOfRooms: " + localStorage.getItem("numberOfRooms") + "<br>";
 
                return roomTypeData;
             }
 
 
             fetch(formatUrl())
-            .then(resp => resp.json)
+            .then(resp => resp.url)
             .then(clientData => {
                 let reservation= "";
 
-                reservation+= localStorage.getItem("hotelName") + "<br>";
-
-                for (let x in clientData) {
-                    reservation+= clientData[x] + "<br>";
-                }
+                reservation+= "hotelName: " + localStorage.getItem("hotelName") + "<br>";
 
                 reservation+=getDataFromLocalStrorage();
                 reservation+="<br>";
+                reservation+= "<p>ClientData</p>"
+                
+                new URLSearchParams(window.location.search).forEach((value, name) => {
+                    reservation+= `${name}: ${value}` + "<br>";
+                });
+
                 return reservation;
             })
             .then(reservation => document.getElementById("reservation").innerHTML = reservation)

@@ -3,16 +3,28 @@
     <body>
         
         <p>your reservation is confirmed</p>
+        <p>Thank you, for booking with SpaceHotels, have </p>
         <p id="confirmed"></p>
+        <button onclick="returnToHomePage()">back Home</button>
 
         <script>
-            fetch("http://localhost:8080/makeAReservation")
+            function formatUrl() {
+               return "http://localhost:8080/makeAReservation?price=" + localStorage.getItem("totalPrice");
+            }
+
+            function returnToHomePage() {
+                window.location.href='../testFindHotels.html';
+            }
+
+            setTimeout(returnToHomePage,15000);
+
+            fetch(formatUrl())
             .then(resp => resp.json())
             .then(reserv => {
-                let text = "";
+                let text = "Your Reservation" + "<br>";
 
                 for (let pr in reserv) {
-                    text += reserv[pr] + "<br>";
+                    text += pr + ": " + reserv[pr] + "<br>";
                 }
 
                 return text;

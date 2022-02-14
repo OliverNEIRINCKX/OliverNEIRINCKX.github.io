@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <body>
-        <p>something something</p>
+        <h3>Found Hotels</h3>
         <p id="test"></p>
         
         <script>
@@ -34,21 +34,8 @@
                                     + "<label for=\"" + hotel[y] + "\" >"
                                     + "<br>";
                             }
-                            else if (y == "availableRoomTypes") {
-                                let roomTypes = hotel[y];
-                                
-                                for (let z in roomTypes) {
-                                    let roomType = roomTypes[z];
-                                    
-                                    for (let a in roomType) {
-                                        text += a + " : " + roomType[a] + "<br>";
-                                    }
-                                    text += "<br>";
-                                }
-                            } 
-
-                            else {
-                                text += y + " : " + hotel[y] + "<br>"; 
+                            else if (y == "description") {
+                               text += y + " : " + hotel[y] + "<br>"; 
                             } 
                     
                         }

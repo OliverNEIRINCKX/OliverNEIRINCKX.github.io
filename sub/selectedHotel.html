@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
     <body>
-        <p>jjiouo</p>
         <p id="fuck"></p>
         <p id="demo"></p>
         
@@ -12,8 +11,6 @@
             let searchParams = new URLSearchParams(window.location.search);
 
             let str = url + searchParams.toString();
-
-            document.getElementById("fuck").innerHTML = str;
 
             return str;
            }
@@ -26,6 +23,7 @@
 
                         for (let x in hotel) {
                             if (x == "name") {
+                              text+= "<h2>" + hotel[x] + "</h2>"  
                               localStorage.setItem("hotelName", hotel[x]);  
                             }
 
@@ -63,7 +61,7 @@
                             }
 
                             else {
-                                text+= x + ":" + hotel[x] + "<br>";
+                                text+= x + ": " + hotel[x] + "<br>";
                             }
                         }
 

@@ -1,8 +1,16 @@
 <!DOCTYPE html>
 <html>
     <body>
+        <h2>Pay For Reservation</h2>
         <form action="yourReservationIsPayedAndConfirmed.html">
             <input type="submit" name="pay" value="Pay">
         </form>
+        <script>
+            function returnToHomePage() {
+                window.location.href='../testFindHotels.html';
+            }
+
+            setTimeout(returnToHomePage,10000);
+        </script>
     </body>
 </html>
