@@ -34,8 +34,7 @@
                 });
             }
 
-            document.getElementById("email").innerHTML = localStorage.getItem("emailAddress");
-
+            
             fetch(formatUrl())
             .then(resp => resp.json())
             .then(reserv => {
@@ -50,8 +49,10 @@
             .then(text => {
                document.getElementById("confirmed").innerHTML = text;
                sendEmail(localStorage.getItem("emailAddress"), text);
-               setTimeout(returnToHomePage,15000);  
+                
             })
+            
+            setTimeout(returnToHomePage,35000); 
             
         </script>
 
