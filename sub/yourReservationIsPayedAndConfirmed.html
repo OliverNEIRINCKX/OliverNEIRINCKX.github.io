@@ -34,9 +34,6 @@
                 });
             }
 
-
-            setTimeout(returnToHomePage,15000);
-
             document.getElementById("email").innerHTML = localStorage.getItem("emailAddress");
 
             fetch(formatUrl())
@@ -52,7 +49,8 @@
             })
             .then(text => {
                document.getElementById("confirmed").innerHTML = text;
-               sendEmail(localStorage.getItem("emailAddress"), text);  
+               sendEmail(localStorage.getItem("emailAddress"), text);
+               setTimeout(returnToHomePage,15000);  
             })
             
         </script>
