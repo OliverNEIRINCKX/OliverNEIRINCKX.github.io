@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <h3>Delete your Reservation</h3>
+        <label for="IdNumber">Fill in Your IdNumber: </label>
+            <input type= "text" id= "IdNumber" name= "IdNumber" >
+        <button onclick="deleleteYourReservation()">delete Your Reservation</button>
+
+        <p id="reserv"></p>
+
+        <script>
+            function frmt(number) {
+                if (number < 10) return "0" + number;
+                else return number;
+            }
+
+            function getCurrentDate() {
+                let currentDate = new Date();
+                let currentDateString = currentDate.getFullYear() + "-" + frmt((currentDate.getMonth() + 1)) + "-" + frmt(currentDate.getDate());
+                
+                return currentDateString;
+            }
+            
+            function url() {
+               return "http://localhost:8080/deleteYourReservation?id=" + document.getElementById("IdNumber").value + "&currentDate=" + getCurrentDate();
+            }
+
+            function deleteYourReservation() {
+                fetch(url())
+                .then(resp => {
+                    if (resp.status == 404) {
+                        throw new String("reservation not found");
+                    } else if (resp.status == 202) {
+                        throw new String("your reservation is deleted, but you won't be recompseded");
+                    } else {
+                        document.getElementById("reserv").innerHTML = "your reservation is deleted";
+                    }
+                })
+                .catch(error => {
+                    document.getElementById("reserv").innerHTML = error;
+                });
+            }
+
+        </script>
+    </body>
+</html>

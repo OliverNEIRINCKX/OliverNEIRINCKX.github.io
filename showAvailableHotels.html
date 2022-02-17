@@ -16,7 +16,13 @@
            
 
             fetch(formatUrl())
-                .then(resp => resp.json())
+                .then(resp => {
+                    if (!resp.ok) {
+                        throw new String("no hotels found :(");
+                    }
+
+                    return resp.json()
+                })
                 .then(list => {
                     let text = "";
 
@@ -47,6 +53,9 @@
                     return text;
                 })
                 .then(text => document.getElementById("test").innerHTML= text)
+                .catch(error => {
+                    document.getElementById("test").innerHTML = error;
+                });
 
         </script>
     </body>

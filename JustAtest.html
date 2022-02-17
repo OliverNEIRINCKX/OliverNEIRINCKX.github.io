@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <p id="justATest"></p>
+
+        <script>
+
+            fetch("http://localhost:8080/justATest")
+            .then(resp => {
+                if (!resp.ok) {
+                    throw new String("something went wrong");
+                }
+
+                return resp.json;
+            })
+            .then(s => document.getElementById("justATest").innerHTML = s)
+            .catch(error => {
+                document.getElementById("justATest").innerHTML = error;
+            });
+            
+            
+        </script>
+    </body>
+</html>

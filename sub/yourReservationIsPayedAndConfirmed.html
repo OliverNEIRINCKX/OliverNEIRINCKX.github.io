@@ -1,13 +1,18 @@
 <!DOCTYPE html>
 <html>
     <body>
-        
+        <p id="email"></p>
         <p>your reservation is confirmed</p>
-        <p>Thank you, for booking with SpaceHotels, have </p>
+        <p>Thank you, for booking with SpaceHotels, have a good stay :)</p>
         <p id="confirmed"></p>
         <button onclick="returnToHomePage()">back Home</button>
 
-        <script>
+        <script src=
+        "https://smtpjs.com/v3/smtp.js">
+        </script>
+
+        <script type="text/javascript">
+            
             function formatUrl() {
                return "http://localhost:8080/makeAReservation?price=" + localStorage.getItem("totalPrice");
             }
@@ -16,7 +21,23 @@
                 window.location.href='../testFindHotels.html';
             }
 
+            function sendEmail(receiver, body) {
+                Email.send({
+                    SecureToken : "d23d38bc-4df9-4d32-bd39-3c49533be08d",
+                    To : receiver,
+                    From : "oliverneirinckx@gmail.com",
+                    Subject : "Your Reservation at SpaceHotels",
+                    Body : body+= "<br><a href=\"OliverNEIRINCKX.github.io\deleteYourReservation.html\">To delete your Reservation click here</a>"
+                })
+                .then(function (message) {
+                    alert("mail sent successfully")
+                });
+            }
+
+
             setTimeout(returnToHomePage,15000);
+
+            document.getElementById("email").innerHTML = localStorage.getItem("emailAddress");
 
             fetch(formatUrl())
             .then(resp => resp.json())
@@ -26,10 +47,19 @@
                 for (let pr in reserv) {
                     text += pr + ": " + reserv[pr] + "<br>";
                 }
-
+                
                 return text;
             })
-            .then(text => document.getElementById("confirmed").innerHTML = text)
+            .then(text => {
+               document.getElementById("confirmed").innerHTML = text;
+               sendEmail(localStorage.getItem("emailAddress"), text);  
+            })
+            
+        </script>
+
+        
+            
+        <script type="text/javascript">
             
         </script>
     </body>

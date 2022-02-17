@@ -51,6 +51,8 @@
                 
                 new URLSearchParams(window.location.search).forEach((value, name) => {
                     reservation+= `${name}: ${value}` + "<br>";
+
+                    if(name == "emailAddress") localStorage.setItem(name, value);
                 });
 
                 return reservation;
