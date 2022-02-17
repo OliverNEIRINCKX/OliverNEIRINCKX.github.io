@@ -29,7 +29,7 @@
 
                             if (x == "availableRoomTypes") {
                                 let roomTypes = hotel[x];
-                                text+= "<br>";
+                                text+= "<p>Select Your RoomType: </p>";
                                 text+= "<form action=\"fillInYourClientData.html\" >";
 
                                 for (let y in roomTypes) {
@@ -40,7 +40,8 @@
                                             text+= "<input type=\"radio\" " 
                                                 + "id=\"" + roomType[z] + "\" "
                                                 + "name=\"roomTypeName\" "
-                                                + "value=\"" + roomType[z] + "\" >"
+                                                + "value=\"" + roomType[z] + "\" "
+                                                + "required>"
                                                 + "<br>"
                                                 + "<label for=\"" + roomType[z] + "\" >"
                                                 + z + ": " + roomType[z] + "<br>";

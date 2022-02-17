@@ -3,10 +3,12 @@
     <body>
         <h3>Delete your Reservation</h3>
         <label for="IdNumber">Fill in Your IdNumber: </label>
-            <input type= "text" id= "IdNumber" name= "IdNumber" >
-        <button onclick="deleleteYourReservation()">delete Your Reservation</button>
+            <input type= "number" id="IdNumber" name= "IdNumber" value="5">
+
+        <button onclick="deleteYourReservation()">delete Your Reservation</button>
 
         <p id="reserv"></p>
+        <p id="numb"></p>
 
         <script>
             function frmt(number) {
@@ -22,7 +24,9 @@
             }
             
             function url() {
-               return "http://localhost:8080/deleteYourReservation?id=" + document.getElementById("IdNumber").value + "&currentDate=" + getCurrentDate();
+                document.getElementById("numb").innerHTML = "555";
+
+                return "http://localhost:8080/deleteYourReservation?id=" + document.getElementById("IdNumber").value;
             }
 
             function deleteYourReservation() {
@@ -41,6 +45,7 @@
                 });
             }
 
+           
         </script>
     </body>
 </html>
