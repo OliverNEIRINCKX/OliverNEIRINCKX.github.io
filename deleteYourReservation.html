@@ -35,7 +35,7 @@
                     if (resp.status == 404) {
                         throw new String("reservation not found");
                     } else if (resp.status == 202) {
-                        throw new String("your reservation is deleted, but you won't be recompseded");
+                        throw new String("your reservation is deleted, but you won't be compensated");
                     } else {
                         document.getElementById("reserv").innerHTML = "your reservation is deleted";
                     }
